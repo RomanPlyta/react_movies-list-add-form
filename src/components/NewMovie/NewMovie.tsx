@@ -23,6 +23,10 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
     imdbId: '',
   });
 
+  // Increase the count after successful form submission
+  // to reset touched status of all the `Field`s
+  const [count, setCount] = useState(0);
+
   const handleChange = (field: string, newValue: string) => {
     setMovie(prev => ({ ...prev, [field]: newValue }));
   };
@@ -39,11 +43,9 @@ export const NewMovie: React.FC<Props> = ({ onAdd }) => {
       imdbUrl: '',
       imdbId: '',
     });
-  };
 
-  // Increase the count after successful form submission
-  // to reset touched status of all the `Field`s
-  const [count] = useState(0);
+    setCount(prev => prev + 1);
+  };
 
   const isFormValid =
     movie.title.trim() !== '' &&
